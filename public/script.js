@@ -217,13 +217,11 @@ class GameScene extends Phaser.Scene {
     this.movingSounds = [this.move1, this.move2, this.move3, this.move4];
 
     setInterval(() => {
-      if (soundControl.checked === true) {
         this.movingSounds[this.soundLoop].play();
         this.soundLoop++;
         if (this.soundLoop == 4) {
           this.soundLoop = 0;
         }
-      }
     }, 500);
 
     // subscribe to the game tick
@@ -358,13 +356,9 @@ class GameScene extends Phaser.Scene {
   explodeAndKill(deadPlayerId) {
     this.avatars[deadPlayerId].disableBody(true, true);
     if (deadPlayerId == myClientId) {
-      if (soundControl.checked === true) {
         this.myDeathSound.play(); 
-      }
     } else {
-      if (soundControl.checked === true) {
         this.opponentDeathSound.play();
-      }
     }
     let explosion = new Explosion(
       this,
@@ -401,9 +395,7 @@ class GameScene extends Phaser.Scene {
     this.visibleBullets[bulletId].bulletSprite = this.physics.add
       .sprite(this.ship.x + 23, bulletObject.y, "bullet")
       .setOrigin(0.5, 0.5);
-    if (document.getElementById('sound').checked === true) {
       this.shootSound.play();
-    }
     // add an overlap callback if the current player is still alive
     if (amIalive) {
       if (
